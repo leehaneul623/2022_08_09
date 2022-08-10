@@ -3,11 +3,9 @@ package com.mysite.shoppingMall.Vo;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,4 +22,7 @@ public class MallUser {
     private Integer birthday;
     private String homeAddress;
     private String cellphone;
+
+    @OneToMany(mappedBy = "mallUser", cascade = CascadeType.REMOVE)
+    private List<Question> questionList;
 }

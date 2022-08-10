@@ -26,18 +26,17 @@
                 <tr class="bg-gray-800">
                     <th class="text-gray-300 py-3">No.</th>
                     <th class="text-gray-300 py-3">작성자</th>
-                    <th class="text-gray-300 px-5 py-3">상품명</th>
                     <th class="text-gray-300 px-8 py-3">제목</th>
                     <th class="text-gray-300 py-3">작성날짜</th>
                 </tr>
                 </thead>
                 <tbody class="justify-between">
-                <tr class="">
+
+                <tr th:each="question : ${questionList}" class="">
                     <th class="px-4 py-3">게시글번호</th>
-                    <th class="px-4 py-3">작성자이름</th>
-                    <th class="px-4 py-3">상품명</th>
-                    <th class="px-4 py-3">제목</th>
-                    <th class="px-4 py-3">regDate</th>
+                    <th th:text="${question.mallUser.name}" class="px-4 py-3">작성자이름</th>
+                    <th th:text="${question.subject}" class="px-4 py-3"><a href="">제목</a></th>
+                    <th th:text="${question.createDate}" class="px-4 py-3">regDate</th>
                 </tr>
 
                 </tbody>
