@@ -5,7 +5,6 @@ import com.mysite.shoppingMall.Service.QuestionService;
 import com.mysite.shoppingMall.Vo.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,11 +33,10 @@ public class MainController {
     }
 
     @RequestMapping("/test2")
-    public String showTest2(Model model){
-        List<Question> questionList = questionService.getList(2);
-        model.addAttribute("questionList",questionList);
+    @ResponseBody
+    public List<Question> showTest2(){
 
-        return "user/test.html";
+        return questionRepository.findAll();
     }
 
 }

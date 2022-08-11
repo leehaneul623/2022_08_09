@@ -1,21 +1,33 @@
 package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Repository.QuestionRepository;
+import com.mysite.shoppingMall.Service.QuestionService;
 import com.mysite.shoppingMall.Ut.Ut;
+import com.mysite.shoppingMall.Vo.IsLogined;
 import com.mysite.shoppingMall.Vo.Question;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @RequestMapping("/question")
+@RequiredArgsConstructor
 public class QuestionController {
+
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private QuestionService questionService;
+
+
 
     //C 생성 ==============================================
     @RequestMapping("/doWrite")
@@ -41,8 +53,14 @@ public class QuestionController {
 
     //R 읽기 ==============================================
     @RequestMapping("/list")
-    public String showQuestion(){
+    public String showQuestion(HttpSession httpSession, Model model){
+        IsLogined isLogined = Ut.isLogined(httpSession);
+        List<Question> questionList = this.questionService.getList(isLogined.getUserId());
+
+
+        model.addAttribute("questionList", questionList);
         return "QnA/qna.html";
+
     }
 
     @RequestMapping("/detail") // 단건조회

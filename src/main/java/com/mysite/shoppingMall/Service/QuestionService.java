@@ -13,8 +13,8 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    public List<Question> getList(Integer id){
-        List<Question> questionList = questionRepository.findByMallUserId(2);
+    public List<Question> getList(Integer userId){
+        List<Question> questionList = questionRepository.findByMallUserId(userId);
         return questionList;
     }
 }
